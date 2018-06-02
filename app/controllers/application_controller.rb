@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   def current_username
     if current_student || current_supervisor || current_admin
-      (current_student || current_supervisor || current_admin).email
+      (current_student || current_supervisor || current_admin).to_s
     else
       t('.sign_out', default: 'Sign Out')
     end
