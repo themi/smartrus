@@ -1,14 +1,11 @@
 module ApplicationHelper
 
   def current_avatar(size=32)
-    if current_user
-      if (link = current_user.gravatar_url(size: size))
-        image_tag(link, class: "rounded-circle img-responsive")
-      else
-        current_user.to_s
-      end
+    return "".html_safe if current_user.nil?
+    if (link = current_user.gravatar_url(size: size))
+      image_tag(link, class: "rounded-circle img-responsive")
     else
-      t('.sign_out', default: 'Sign Out')
+      current_user.to_s
     end
   end
 
