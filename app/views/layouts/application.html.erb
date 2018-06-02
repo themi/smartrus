@@ -8,20 +8,22 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :styles %>
   </head>
   <body>
     <header>
       <%= render "navigation" %>
+      <%= render "flash_messages" %>
     </header>
 
     <main role="main">
-       <%= render "flash_messages" %>
-       <%= yield %>
+      <%= yield %>
     </main>
 
     <footer class="footer">
       <%= render "footer" %>
     </footer>
 
+    <%= yield :scripts %>
   </body>
 </html>

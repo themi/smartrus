@@ -13,7 +13,16 @@
 //= require jquery
 //= require jquery-ui
 //= require rails-ujs
+//= require bootstrap
 //= require activestorage
 //= require turbolinks
 //= require moment
 //= require_tree .
+
+$(document).ready(function () {
+   $('#sidebarCollapse').on('click', function () {
+       $('#sidebar').toggleClass('active');
+   });
+});
+
+
