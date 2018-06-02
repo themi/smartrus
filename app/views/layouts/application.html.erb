@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Smartrus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Smart R Us" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "School of life" %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <header>
+      <%= render "navigation" %>
+    </header>
 
-    <%= render "flash_message" %>
+    <main role="main">
+       <%= render "flash_messages" %>
+       <%= yield %>
+    </main>
 
-    <%= yield %>
+    <footer class="footer">
+      <%= render "footer" %>
+    </footer>
 
   </body>
 </html>
