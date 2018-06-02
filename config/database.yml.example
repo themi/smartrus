@@ -1,0 +1,32 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: smartrus_development
+  username: postgres
+  host: localhost
+
+test:
+  <<: *default
+  database: smartrus_test
+  username: postgres
+  host: localhost
+
+staging:
+  <<: *default
+  database: <%= ENV['DBNAME'] %>
+  username: <%= ENV['DBUSER'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
+  port: <%= ENV['DBPORT'] %>
+
+production:
+  <<: *default
+  database: <%= ENV['DBNAME'] %>
+  username: <%= ENV['DBUSER'] %>
+  password: <%= ENV['DBPASSWORD'] %>
+  host: <%= ENV['DBHOST'] %>
+  port: <%= ENV['DBPORT'] %>

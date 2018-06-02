@@ -1,0 +1,2 @@
+module Supervisors::DashboardHelper
+end
