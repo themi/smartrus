@@ -4,7 +4,7 @@ Disambiguation:  `smart are us`.  my intention is for __you__ to assert yourself
 
 Alternative pronounciation:  `smart-arse`  (lol)
 
-Noun: The self paced training website/app `smartrus.com` developed by [heminet](hemi.co.nz).
+Noun: The self paced training website/app `smartrus.net` developed by [heminet](hemi.co.nz).
 
 Verb: learn what others have to teach - teach others what you have learnt.
 
