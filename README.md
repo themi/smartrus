@@ -8,6 +8,8 @@ Noun: The self paced training website/app `smartrus.com` developed by [heminet](
 
 Verb: learn what others have to teach - teach others what you have learnt.
 
+Adjective: (of a person) intelligent, understanding, creative
+
 
 ## Local setup
 
