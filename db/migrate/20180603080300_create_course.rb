@@ -1,7 +1,7 @@
 class CreateCourse < ActiveRecord::Migration[5.2]
   def change
     create_table :courses do |t|
-      t.references :category, foreign_key: true, null: true
+      t.references :category, foreign_key: true
       t.string :name
       t.string :description
       t.string :objective

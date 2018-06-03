@@ -34,16 +34,16 @@ if Rails.env.development?
   puts "Admin Login: #{u.email} Password: #{password}"
 
   cat = Category.create(grouping: "MAIN", sub_grouping: "FORK")
-  unless Course.find_by(name: "Course Primus", category_id: cat.id)
-    course = Course.create(name: "Course Primus", category_id: cat.id, description: "The First COurse of the Day", objective: "Iron Trousers", reason_why: "Because its true")
+  unless Course.find_by(name: "Course Primus", category: cat)
+    course = Course.create(name: "Course Primus", category: cat, description: "The First COurse of the Day", objective: "Iron Trousers", reason_why: "Because its true")
     (1..2).each do |number|
-      lesson = course.children.create(name: "Lesson #{number}")
+      lesson = course.children.create(name: "Lesson #{number}", category: course.category)
       lesson.audio_visuals.create(source: FFaker::Name.name)
       (0..1).each do |item|
-        sect = lesson.children.create(name: "Section #{SECT_INDEX[item]}")
+        sect = lesson.children.create(name: "Section #{SECT_INDEX[item]}", category: lesson.category)
         sect.definitions.create(word: FFaker::Name.name)
         (0..1).each do |i|
-          part = sect.children.create(name: "Part #{PART_INDEX[i]}")
+          part = sect.children.create(name: "Part #{PART_INDEX[i]}", category: sect.category)
           part.qualifications.create(question: FFaker::Name.name)
         end
       end
