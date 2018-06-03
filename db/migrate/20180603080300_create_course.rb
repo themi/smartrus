@@ -1,7 +1,7 @@
 class CreateCourse < ActiveRecord::Migration[5.2]
   def change
     create_table :courses do |t|
-      t.string :category
+      t.references :category, foreign_key: true, null: true
       t.string :name
       t.string :description
       t.string :objective
@@ -11,6 +11,7 @@ class CreateCourse < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :courses, [:category, :name], name: "index_courses_name"
+    add_index :courses, [:category_id, :name], name: "index_courses_name"
+    add_index :courses, [:category_id, :lineage], name: "index_courses_lineage"
   end
 end

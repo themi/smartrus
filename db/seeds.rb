@@ -10,7 +10,7 @@ if Rails.env.development?
   raise "set the envvar DEVELOPERS_EMAIL before running db:seed" if ENV["DEVELOPERS_EMAIL"].nil?
   password = ENV["DEVELOPERS_PASSWORD"] || "Password1!"
   SECT_INDEX = ["I","II","III","IV","V","VI","VII","VIII","IX","X"]
-  PART_INDEX = ["A","B","C","D","E","F","G","H","I","J","K"]
+  PART_INDEX = ["A","B","C","D","E","F","G","H","I","J","K","L"]
 
   def make_user(type)
     email_address = ENV["DEVELOPERS_EMAIL"].split("@").join("+#{type.to_s.downcase}@")
@@ -33,8 +33,9 @@ if Rails.env.development?
   u = make_user(:admin)
   puts "Admin Login: #{u.email} Password: #{password}"
 
-  unless Course.find_by(name: "Course Primus", category: "MAIN:FORK")
-    course = Course.create(name: "Course Primus", category: "MAIN:FORK", description: "The First COurse of the Day", objective: "Iron Trousers", reason_why: "Because its true")
+  cat = Category.create(grouping: "MAIN", sub_grouping: "FORK")
+  unless Course.find_by(name: "Course Primus", category_id: cat.id)
+    course = Course.create(name: "Course Primus", category_id: cat.id, description: "The First COurse of the Day", objective: "Iron Trousers", reason_why: "Because its true")
     (1..2).each do |number|
       lesson = course.children.create(name: "Lesson #{number}")
       lesson.audio_visuals.create(source: FFaker::Name.name)

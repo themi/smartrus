@@ -25,8 +25,14 @@ ActiveRecord::Schema.define(version: 2018_06_03_081040) do
     t.index ["course_id"], name: "index_audio_visuals_on_course_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "grouping"
+    t.string "sub_grouping"
+    t.index ["grouping", "sub_grouping"], name: "index_categories_name"
+  end
+
   create_table "courses", force: :cascade do |t|
-    t.string "category"
+    t.bigint "category_id"
     t.string "name"
     t.string "description"
     t.string "objective"
@@ -35,7 +41,9 @@ ActiveRecord::Schema.define(version: 2018_06_03_081040) do
     t.string "lineage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category", "name"], name: "index_courses_name"
+    t.index ["category_id", "lineage"], name: "index_courses_lineage"
+    t.index ["category_id", "name"], name: "index_courses_name"
+    t.index ["category_id"], name: "index_courses_on_category_id"
   end
 
   create_table "definitions", force: :cascade do |t|
@@ -105,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_06_03_081040) do
   end
 
   add_foreign_key "audio_visuals", "courses"
+  add_foreign_key "courses", "categories"
   add_foreign_key "definitions", "courses"
   add_foreign_key "qualifications", "courses"
   add_foreign_key "transcripts", "audio_visuals"

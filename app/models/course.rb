@@ -4,6 +4,6 @@ class Course < ApplicationRecord
   has_many :definitions
 
   include HasLineage
-  has_lineage #order_column: "category" #, tree_key_column: "category"
+  has_lineage tree_key_column: "category_id"
 
 end
