@@ -20,15 +20,14 @@
     <dt>Reason why:</dt>
     <dd><%= @course.reason_why %></dd>
   </dl>
+
+  <%= ancestor_breadcrumbs_for(@course) %>
+
+  <% if @course.descendants.any? %>
+    <%= descendant_list_for(@course) %>
+  <% else %>
+    No Lessons
+  <% end %>
+
+
 </div>
-
-
-<% if @course.descendants.any? %>
-  <ul>
-    <% @course.descendants.each do |lesson| %>
-      <li><%= lesson.name %></li>
-    <% end %>
-  </ul>
-<% else %>
-  No Lessons
-<% end %>
