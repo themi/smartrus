@@ -1,5 +1,5 @@
 class AudioVisual < ApplicationRecord
-  belongs_to :lesson
+  belongs_to :course
   has_many :transcripts
-  acts_as_list scope: :lesson
+  acts_as_list scope: :course
 end

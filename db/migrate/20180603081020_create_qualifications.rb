@@ -4,10 +4,10 @@ class CreateQualifications < ActiveRecord::Migration[5.2]
       t.integer :position
       t.text :question
       t.text :answer_reference
-      t.references :lesson, foreign_key: true
+      t.references :course, foreign_key: true
 
       t.timestamps
     end
-    add_index :qualifications, [:lesson_id, :position], name: "index_qualifications_position"
+    add_index :qualifications, [:course_id, :position], name: "index_qualifications_position"
   end
 end

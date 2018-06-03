@@ -18,19 +18,21 @@ ActiveRecord::Schema.define(version: 2018_06_03_081040) do
   create_table "audio_visuals", force: :cascade do |t|
     t.integer "position"
     t.string "source"
-    t.bigint "lesson_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lesson_id", "position"], name: "index_audio_visuals_position"
-    t.index ["lesson_id"], name: "index_audio_visuals_on_lesson_id"
+    t.index ["course_id", "position"], name: "index_audio_visuals_position"
+    t.index ["course_id"], name: "index_audio_visuals_on_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
+    t.string "category"
     t.string "name"
     t.string "description"
-    t.string "category"
     t.string "objective"
     t.string "reason_why"
+    t.bigint "parent_id"
+    t.string "lineage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category", "name"], name: "index_courses_name"
@@ -45,38 +47,22 @@ ActiveRecord::Schema.define(version: 2018_06_03_081040) do
     t.text "negative_examples"
     t.string "origin"
     t.string "reference"
-    t.bigint "lesson_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_definitions_on_lesson_id"
-    t.index ["word"], name: "index_definitions_on_word", unique: true
-  end
-
-  create_table "lessons", force: :cascade do |t|
     t.bigint "course_id"
-    t.integer "position"
-    t.string "name"
-    t.string "description"
-    t.string "objective"
-    t.string "reason_why"
-    t.integer "level", default: 0
-    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id", "parent_id", "name"], name: "index_lessons_name"
-    t.index ["course_id", "parent_id", "position"], name: "index_lessons_position"
-    t.index ["course_id"], name: "index_lessons_on_course_id"
+    t.index ["course_id"], name: "index_definitions_on_course_id"
+    t.index ["word"], name: "index_definitions_on_word", unique: true
   end
 
   create_table "qualifications", force: :cascade do |t|
     t.integer "position"
     t.text "question"
     t.text "answer_reference"
-    t.bigint "lesson_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lesson_id", "position"], name: "index_qualifications_position"
-    t.index ["lesson_id"], name: "index_qualifications_on_lesson_id"
+    t.index ["course_id", "position"], name: "index_qualifications_position"
+    t.index ["course_id"], name: "index_qualifications_on_course_id"
   end
 
   create_table "transcripts", force: :cascade do |t|
@@ -118,9 +104,8 @@ ActiveRecord::Schema.define(version: 2018_06_03_081040) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "audio_visuals", "lessons"
-  add_foreign_key "definitions", "lessons"
-  add_foreign_key "lessons", "courses"
-  add_foreign_key "qualifications", "lessons"
+  add_foreign_key "audio_visuals", "courses"
+  add_foreign_key "definitions", "courses"
+  add_foreign_key "qualifications", "courses"
   add_foreign_key "transcripts", "audio_visuals"
 end

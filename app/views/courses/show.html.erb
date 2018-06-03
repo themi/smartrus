@@ -23,10 +23,12 @@
 </div>
 
 
-<% if @course.lessons.any? %>
-  <% @course.lessons.each do |lesson| %>
-    <li><%= lesson.name %></li>
-  <% end %>
+<% if @course.descendants.any? %>
+  <ul>
+    <% @course.descendants.each do |lesson| %>
+      <li><%= lesson.name %></li>
+    <% end %>
+  </ul>
 <% else %>
   No Lessons
 <% end %>

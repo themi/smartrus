@@ -9,7 +9,7 @@ class CreateDefinitions < ActiveRecord::Migration[5.2]
       t.text :negative_examples
       t.string :origin
       t.string :reference
-      t.references :lesson, foreign_key: true
+      t.references :course, foreign_key: true
 
       t.timestamps
     end
