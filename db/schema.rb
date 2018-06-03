@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_062955) do
+ActiveRecord::Schema.define(version: 2018_06_03_081040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 2018_06_03_062955) do
   create_table "audio_visuals", force: :cascade do |t|
     t.integer "position"
     t.string "source"
-    t.integer "studyable_id"
-    t.string "studyable_type"
+    t.bigint "lesson_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["studyable_id", "studyable_type", "position"], name: "index_audio_visuals_position"
+    t.index ["lesson_id", "position"], name: "index_audio_visuals_position"
+    t.index ["lesson_id"], name: "index_audio_visuals_on_lesson_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -36,15 +36,8 @@ ActiveRecord::Schema.define(version: 2018_06_03_062955) do
     t.index ["category", "name"], name: "index_courses_name"
   end
 
-  create_table "definition_links", force: :cascade do |t|
-    t.integer "definition_id"
-    t.integer "studyable_id"
-    t.string "studyable_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "definitions", force: :cascade do |t|
+    t.integer "position"
     t.string "word"
     t.string "description"
     t.string "audio_visual_link"
@@ -52,37 +45,38 @@ ActiveRecord::Schema.define(version: 2018_06_03_062955) do
     t.text "negative_examples"
     t.string "origin"
     t.string "reference"
+    t.bigint "lesson_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_definitions_on_lesson_id"
     t.index ["word"], name: "index_definitions_on_word", unique: true
   end
 
-  create_table "qualifications", force: :cascade do |t|
-    t.integer "position"
-    t.text "question_or_task"
-    t.text "answer_reference"
-    t.integer "studyable_id"
-    t.string "studyable_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["studyable_id", "studyable_type", "position"], name: "index_qualifications_position"
-  end
-
-  create_table "studies", force: :cascade do |t|
+  create_table "lessons", force: :cascade do |t|
     t.bigint "course_id"
     t.integer "position"
     t.string "name"
     t.string "description"
     t.string "objective"
     t.string "reason_why"
-    t.string "audio_visual_link"
-    t.integer "studyable_id"
-    t.string "studyable_type"
+    t.integer "level", default: 0
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id", "studyable_type", "studyable_id", "name"], name: "index_studies_name"
-    t.index ["course_id", "studyable_type", "studyable_id", "position"], name: "index_studies_position"
-    t.index ["course_id"], name: "index_studies_on_course_id"
+    t.index ["course_id", "parent_id", "name"], name: "index_lessons_name"
+    t.index ["course_id", "parent_id", "position"], name: "index_lessons_position"
+    t.index ["course_id"], name: "index_lessons_on_course_id"
+  end
+
+  create_table "qualifications", force: :cascade do |t|
+    t.integer "position"
+    t.text "question"
+    t.text "answer_reference"
+    t.bigint "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "position"], name: "index_qualifications_position"
+    t.index ["lesson_id"], name: "index_qualifications_on_lesson_id"
   end
 
   create_table "transcripts", force: :cascade do |t|
@@ -124,6 +118,9 @@ ActiveRecord::Schema.define(version: 2018_06_03_062955) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "studies", "courses"
+  add_foreign_key "audio_visuals", "lessons"
+  add_foreign_key "definitions", "lessons"
+  add_foreign_key "lessons", "courses"
+  add_foreign_key "qualifications", "lessons"
   add_foreign_key "transcripts", "audio_visuals"
 end

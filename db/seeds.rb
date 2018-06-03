@@ -34,19 +34,16 @@ if Rails.env.development?
   puts "Admin Login: #{u.email} Password: #{password}"
 
   unless Course.find_by(name: "Course Primus", category: "MAIN:FORK")
-    course = Course.create(name: "Course Primus", category: "MAIN:FORK")
-    (1..2).each do |number|
+    course = Course.create(name: "Course Primus", category: "MAIN:FORK", description: "The First COurse of the Day", objective: "Iron Trousers", reason_why: "Because its true")
+    (0..1).each do |number|
       lesson = course.lessons.create(name: "Lesson #{number}")
       lesson.audio_visuals.create(source: FFaker::Name.name)
-      (1..3).each do |item|
-        sect = lesson.sections.create(name: "Section #{SECT_INDEX[item]}", course_id: course.id)
-        sect.qualifications.create(question_or_task: FFaker::Name.name)
-        (1..5).each do |i|
-          part = sect.parts.create(name: "Part #{PART_INDEX[i]}", course_id: course.id)
-          part.definitions.create(word: FFaker::Name.name)
-          part.qualifications.create(question_or_task: FFaker::Name.name)
-          av = part.audio_visuals.create(source: FFaker::Name.name)
-          av.transcripts.create(language: "en:gb", body: FFaker::Name.name)
+      (0..1).each do |item|
+        sect = lesson.add_child("Section #{SECT_INDEX[number]}")
+        sect.definitions.create(word: FFaker::Name.name)
+        (0..1).each do |i|
+          part = sect.add_child("Part #{PART_INDEX[i]}")
+          part.qualifications.create(question: FFaker::Name.name)
         end
       end
     end

@@ -1,4 +1,5 @@
 class Qualification < ApplicationRecord
-  belongs_to :studyable, polymorphic: true
-  acts_as_list scope: :studyable
+  belongs_to :lesson
+  has_many :transcripts
+  acts_as_list scope: :lesson
 end

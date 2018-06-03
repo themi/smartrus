@@ -3,11 +3,10 @@ class CreateAudioVisuals < ActiveRecord::Migration[5.2]
     create_table :audio_visuals do |t|
       t.integer :position
       t.string :source
-      t.integer :studyable_id
-      t.string  :studyable_type
+      t.references :lesson, foreign_key: true
 
       t.timestamps
     end
-    add_index :audio_visuals, [:studyable_id, :studyable_type, :position], name: "index_audio_visuals_position"
+    add_index :audio_visuals, [:lesson_id, :position], name: "index_audio_visuals_position"
   end
 end

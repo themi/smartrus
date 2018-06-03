@@ -1,6 +1,7 @@
 class CreateDefinitions < ActiveRecord::Migration[5.2]
   def change
     create_table :definitions do |t|
+      t.integer :position
       t.string :word
       t.string :description
       t.string :audio_visual_link
@@ -8,6 +9,7 @@ class CreateDefinitions < ActiveRecord::Migration[5.2]
       t.text :negative_examples
       t.string :origin
       t.string :reference
+      t.references :lesson, foreign_key: true
 
       t.timestamps
     end

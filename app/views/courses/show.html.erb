@@ -21,3 +21,12 @@
     <dd><%= @course.reason_why %></dd>
   </dl>
 </div>
+
+
+<% if @course.lessons.any? %>
+  <% @course.lessons.each do |lesson| %>
+    <li><%= lesson.name %></li>
+  <% end %>
+<% else %>
+  No Lessons
+<% end %>

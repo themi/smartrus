@@ -1,4 +1,5 @@
 class Definition < ApplicationRecord
-  has_many :definition_links, class_name: "::DefinitionLink"
-  has_many :studyables, through: :definition_links
+  belongs_to :lesson
+  has_many :transcripts
+  acts_as_list scope: :lesson
 end

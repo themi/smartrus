@@ -1,5 +1,5 @@
 class AudioVisual < ApplicationRecord
-  belongs_to :studyable, polymorphic: true
+  belongs_to :lesson
   has_many :transcripts
-  acts_as_list scope: :studyable
+  acts_as_list scope: :lesson
 end

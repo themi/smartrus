@@ -1,3 +1,3 @@
 class Course < ApplicationRecord
-  has_many :lessons, class_name: "Study::Lesson"
+  has_many :lessons
 end
