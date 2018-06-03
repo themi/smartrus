@@ -37,9 +37,9 @@ gem "simple_form"
 # gem "prawn"
 # gem "prawn-table"
 
+gem "gravtastic"
 gem "image_processing", "~> 1.2"
 gem "mini_magick", "~> 4.8"
-gem "gravtastic"
 
 gem "bootsnap", ">= 1.1.0", require: false
 
