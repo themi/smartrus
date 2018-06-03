@@ -1,0 +1,19 @@
+
+<%= simple_form_for(@definition) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :word %>
+    <%= f.input :description %>
+    <%= f.input :audio_visual_link %>
+    <%= f.input :positive_examples %>
+    <%= f.input :negative_examples %>
+    <%= f.input :origin %>
+    <%= f.input :reference %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

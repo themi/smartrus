@@ -12,6 +12,9 @@
         <% if current_user %>
           <%= render current_user_menu %>
         <% end %>
+        <li class="nav-item">
+          <%= link_to "Courses", courses_path, class: "nav-link" %>
+        </li>
       </ul>
 
       <ul class="navbar-nav justify-content-end">

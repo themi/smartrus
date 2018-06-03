@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     get 'dashboard/index'
   end
 
+  resources :definitions
+  resources :courses
 
   root 'pages#home'
 end

@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>Listing Definitions</h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group" role="group" aria-label="...">
+        <%= link_to fa_icon("plus") + " Definition", new_definition_path, class: "btn btn-success", role: "button" %>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped table-hover table-condensed">
+    <thead>
+      <tr>
+        <th>Word</th>
+        <th>Description</th>
+        <th>Audio visual link</th>
+        <th>Positive examples</th>
+        <th>Negative examples</th>
+        <th>Origin</th>
+        <th>Reference</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @definitions.each do |definition| %>
+        <%= content_tag(:tr, "data-id" => definition.id.to_s) do %>
+          <td><%= definition.word %></td>
+          <td><%= definition.description %></td>
+          <td><%= definition.audio_visual_link %></td>
+          <td><%= definition.positive_examples %></td>
+          <td><%= definition.negative_examples %></td>
+          <td><%= definition.origin %></td>
+          <td><%= definition.reference %></td>
+          <td class="form-actions"><%= link_to fa_icon("eye"), definition, class: "btn btn-primary btn-xs", role: "button" %> <%= link_to fa_icon("pencil"), edit_definition_path(definition), class: "btn btn-success btn-xs", role: "button" %> <%= link_to fa_icon("trash-o"), definition, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-xs", role: "button" %></td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= paginate @definitions, theme: "twitter-bootstrap-4", pagination_class: "pagination-sm" %>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Show Definition</h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group" role="group" aria-label="...">
+        <%= link_to fa_icon("pencil"), edit_definition_path(@definition), class: "btn btn-success", role: "button" %>
+        <%= link_to fa_icon("arrow-left"), definitions_path, class: "btn btn-secondary", role: "button" %>
+      </div>
+    </div>
+  </div>
+
+  <dl class="dl-horizontal">
+    <dt>Word:</dt>
+    <dd><%= @definition.word %></dd>
+    <dt>Description:</dt>
+    <dd><%= @definition.description %></dd>
+    <dt>Audio visual link:</dt>
+    <dd><%= @definition.audio_visual_link %></dd>
+    <dt>Positive examples:</dt>
+    <dd><%= @definition.positive_examples %></dd>
+    <dt>Negative examples:</dt>
+    <dd><%= @definition.negative_examples %></dd>
+    <dt>Origin:</dt>
+    <dd><%= @definition.origin %></dd>
+    <dt>Reference:</dt>
+    <dd><%= @definition.reference %></dd>
+  </dl>
+</div>

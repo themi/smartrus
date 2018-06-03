@@ -1,12 +1,14 @@
-<h1>Editing <%= singular_table_name.titleize %></h1>
+<div class="container">
+  <h1>Editing <%= singular_table_name.titleize %></h1>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="btn-group" role="group" aria-label="...">
-      <%%= link_to fa_icon("eye"), @<%= singular_table_name %>, class: "btn btn-primary", role: "button" %>
-      <%%= link_to fa_icon("arrow-left"), <%= index_helper %>_path, class: "btn btn-default", role: "button" %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group" role="group" aria-label="...">
+        <%%= link_to fa_icon("eye"), @<%= singular_table_name %>, class: "btn btn-primary", role: "button" %>
+        <%%= link_to fa_icon("arrow-left"), <%= index_helper %>_path, class: "btn btn-secondary", role: "button" %>
+      </div>
     </div>
   </div>
-</div>
 
-<%%= render "form" %>
+  <%%= render "form" %>
+</div>

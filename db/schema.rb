@@ -10,10 +10,90 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_060851) do
+ActiveRecord::Schema.define(version: 2018_06_03_062955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "audio_visuals", force: :cascade do |t|
+    t.integer "position"
+    t.string "source"
+    t.integer "studyable_id"
+    t.string "studyable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["studyable_id", "studyable_type", "position"], name: "index_audio_visuals_position"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "category"
+    t.string "objective"
+    t.string "reason_why"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category", "name"], name: "index_courses_name"
+  end
+
+  create_table "definition_links", force: :cascade do |t|
+    t.integer "definition_id"
+    t.integer "studyable_id"
+    t.string "studyable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "definitions", force: :cascade do |t|
+    t.string "word"
+    t.string "description"
+    t.string "audio_visual_link"
+    t.text "positive_examples"
+    t.text "negative_examples"
+    t.string "origin"
+    t.string "reference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word"], name: "index_definitions_on_word", unique: true
+  end
+
+  create_table "qualifications", force: :cascade do |t|
+    t.integer "position"
+    t.text "question_or_task"
+    t.text "answer_reference"
+    t.integer "studyable_id"
+    t.string "studyable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["studyable_id", "studyable_type", "position"], name: "index_qualifications_position"
+  end
+
+  create_table "studies", force: :cascade do |t|
+    t.bigint "course_id"
+    t.integer "position"
+    t.string "name"
+    t.string "description"
+    t.string "objective"
+    t.string "reason_why"
+    t.string "audio_visual_link"
+    t.integer "studyable_id"
+    t.string "studyable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "studyable_type", "studyable_id", "name"], name: "index_studies_name"
+    t.index ["course_id", "studyable_type", "studyable_id", "position"], name: "index_studies_position"
+    t.index ["course_id"], name: "index_studies_on_course_id"
+  end
+
+  create_table "transcripts", force: :cascade do |t|
+    t.string "language"
+    t.text "body"
+    t.bigint "audio_visual_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["audio_visual_id", "language"], name: "index_transcripts_language"
+    t.index ["audio_visual_id"], name: "index_transcripts_on_audio_visual_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,8 +118,12 @@ ActiveRecord::Schema.define(version: 2018_06_01_060851) do
     t.string "type", limit: 32, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "studies", "courses"
+  add_foreign_key "transcripts", "audio_visuals"
 end
