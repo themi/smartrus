@@ -9,8 +9,6 @@
 if Rails.env.development?
   raise "set the envvar DEVELOPERS_EMAIL before running db:seed" if ENV["DEVELOPERS_EMAIL"].nil?
   password = ENV["DEVELOPERS_PASSWORD"] || "Password1!"
-  SECT_INDEX = ["I","II","III","IV","V","VI","VII","VIII","IX","X"]
-  PART_INDEX = ["A","B","C","D","E","F","G","H","I","J","K","L"]
 
   def make_user(type)
     email_address = ENV["DEVELOPERS_EMAIL"].split("@").join("+#{type.to_s.downcase}@")
@@ -33,22 +31,6 @@ if Rails.env.development?
   u = make_user(:admin)
   puts "Admin Login: #{u.email} Password: #{password}"
 
-  cat = Category.create(grouping: "MAIN", sub_grouping: "FORK")
-  unless Course.find_by(name: "Course Primus", category: cat)
-    course = Course.create(name: "Course Primus", category: cat, description: "The First COurse of the Day", objective: "Iron Trousers", reason_why: "Because its true")
-    (1..2).each do |number|
-      lesson = course.children.create(name: "Lesson #{number}", category: course.category)
-      lesson.audio_visuals.create(source: FFaker::Name.name)
-      (0..1).each do |item|
-        sect = lesson.children.create(name: "Section #{SECT_INDEX[item]}", category: lesson.category)
-        sect.definitions.create(word: FFaker::Name.name)
-        (0..1).each do |i|
-          part = sect.children.create(name: "Part #{PART_INDEX[i]}", category: sect.category)
-          part.qualifications.create(question: FFaker::Name.name)
-        end
-      end
-    end
-    Course.reset_lineage_tree
-  end
-
 end
+
+# require_relative "seeding/course_data"

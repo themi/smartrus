@@ -14,5 +14,6 @@ class CreateDefinitions < ActiveRecord::Migration[5.2]
       t.timestamps
     end
     add_index :definitions, :word, unique: true
+    add_index :definitions, [:course_id, :position], name: "index_definitions_position"
   end
 end
