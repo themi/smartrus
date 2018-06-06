@@ -3,7 +3,7 @@ module HasLineage
 
     def tree_table_column_name
       if tree_column_name
-        "#{table_name}.#{tree_column_name}" 
+        "#{table_name}.#{tree_column_name}"
       else
         "''"
       end

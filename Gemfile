@@ -20,18 +20,17 @@ gem "turbolinks", "~> 5"
 gem "uglifier", ">= 1.3.0"
 
 gem "bcrypt", "~> 3.1.7"
-gem "cancancan", "~> 2.0"
 gem "devise"
+gem "pundit"
 
 gem "acts_as_list"
 gem "bootstrap", "~> 4.1.1"
 gem "bootstrap4-kaminari-views"
 gem "country_select"
+gem "draper"
 gem "font-awesome-rails"
 gem "kaminari"
 gem "simple_form"
-# gem "devise-bootstrap-views"
-# gem "cocoon"
 
 # gem "lazy_high_charts"
 # gem "prawn"
@@ -64,15 +63,19 @@ end
 
 group :development do
   gem "annotate"
+  gem 'brakeman', :require => false
   gem "listen", ">= 3.0.5", "< 3.2"
+  gem "rails_best_practices"
+  # gem "spring"
+  # gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", ">= 3.3.0"
 end
 
 group :test do
   gem "capybara"
   gem "database_cleaner"
+  gem "shoulda-matchers", "~> 3.1"
   gem "selenium-webdriver"
-  gem "shoulda-matchers"
   gem "simplecov", require: false
 end
 

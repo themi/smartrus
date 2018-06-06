@@ -29,14 +29,14 @@ module HasLineage
 
     def lineage_tree(tree_id = nil)
       if tree_id.present? && tree_column_name.present?
-        where(tree_column_name.to_sym => tree_id) 
+        where(tree_column_name.to_sym => tree_id)
       else
         all
       end
     end
 
     def new_lineage_path(prefix, raw_index)
-      prefix.to_s + path_pattern(raw_index+1) 
+      prefix.to_s + path_pattern(raw_index+1)
     end
 
     def reset_lineage_tree(tree_id = nil, &block)
@@ -44,7 +44,7 @@ module HasLineage
 
       if connection.adapter_name =~ /postgresql/i
         connection.execute reset_tree_pg
-      else 
+      else
         reset_tree_recursive
       end
     end
@@ -67,7 +67,7 @@ module HasLineage
 
     def root_path_for(path)
       path_array = array_for(path)
-      path_array[0] + path_pattern(path_array[1].to_i) 
+      path_array[0] + path_pattern(path_array[1].to_i)
     end
 
     def reset_tree_recursive(tree_id = nil)

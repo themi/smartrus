@@ -16,7 +16,6 @@ module HasLineage
     def self_and_descendants
       self.class.descendants_of(lineage_path, lineage_tree_id).lineage_order
     end
-    alias :subtree :self_and_descendants
 
     def siblings
       self_and_siblings - [self]
@@ -54,7 +53,6 @@ module HasLineage
       return 0 if lineage_path.nil?
       self.class.hierachy_depth_for(lineage_path)
     end
-    alias :depth :hierarchy_depth
 
     def reset_lineage_tree
       reset_tree_recursive

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  # include Pundit
+  protect_from_forgery
 
   def current_user
     (current_student || current_supervisor || current_admin)

@@ -50,16 +50,19 @@ bundle exec rails db:create db:migrate
 ## Tests
 
 ```
+bundle exec rails_best_practices .
+bundle exec brakeman
 bundle exec rubocop
 bundle exec rspec
 ```
 
 ## Smoke Test
 
-* seed the database and take note of the output - you can use a real email if needed
+* seed the database and take note of the output.  db:seed uses the envvars ADNINISTRATOR_EMAIL and ADMINISTRATORS_PASSWORD
+
 
 ```bash
-DEVELOPERS_EMAIL=your@email.com bundle exec rails db:seed
+bundle exec rails db:seed
 
 Student Login: your+student@email.com Password: Password1!
 Supervisor Login: your+supervisor@email.com Password: Password1!
