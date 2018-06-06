@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id          :bigint(8)        not null, primary key
+#  category_id :bigint(8)
+#  name        :string
+#  description :string
+#  objective   :string
+#  reason_why  :string
+#  parent_id   :bigint(8)
+#  lineage     :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Course < ApplicationRecord
   belongs_to :category
   has_many :qualifications
