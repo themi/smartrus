@@ -4,6 +4,8 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  position       :integer
+#  purpose        :string
+#  description    :string
 #  source_url     :string
 #  imageable_id   :integer
 #  imageable_type :string

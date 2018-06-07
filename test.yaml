@@ -11,14 +11,14 @@
     :objective: At the end of this section you will be able to clean trousers.
     :reason_why: The heat from ironing can burn oils and dirt particals on clothing and therefore leave smudges and marks.
     :description: For best results the first step is to clean the trousers, removing any dirt and oils.  There are three steps a) Prepare the washing machine, b) Wash the trousers and c) Dry the trousers
-    :sections:
+    :lessons:
     - :name: Prepare washing machine
       :description: Connect to water supply, connect power, place cothing into machine, add the soup powder and finally start the washing machine
       :audio_visuals:
       - :purpose: mass
         :source_url: https://localhost:3000/audio_visuals/washing_machine_photo
         :description: A machine designed to wash clothing, it has a large rotating tub with an agitator inside to paddle the clothing, usually can both wash and then rinse the clothes.
-      :sections:
+      :parts:
       - :name: Check water supply
         :description: Your washing machine should ready be connected so we are just making sure that the hose/s are securely connected to the water taps are turned on.
         :audio_visuals:

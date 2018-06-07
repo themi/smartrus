@@ -17,12 +17,14 @@ ActiveRecord::Schema.define(version: 2018_06_05_082016) do
 
   create_table "audio_visuals", force: :cascade do |t|
     t.integer "position"
+    t.string "purpose"
+    t.string "description"
     t.string "source_url"
     t.integer "imageable_id"
     t.string "imageable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["imageable_id", "imageable_type", "position"], name: "index_audio_visuals_position"
+    t.index ["imageable_id", "imageable_type", "purpose", "position"], name: "index_audio_visuals_position"
     t.index ["imageable_id", "imageable_type"], name: "index_audio_visuals_imageable"
   end
 
@@ -52,12 +54,7 @@ ActiveRecord::Schema.define(version: 2018_06_05_082016) do
   create_table "definitions", force: :cascade do |t|
     t.integer "position"
     t.string "word"
-    t.string "description"
-    t.string "audio_visual_link"
-    t.text "positive_examples"
-    t.text "negative_examples"
-    t.string "origin"
-    t.string "reference"
+    t.string "reference_url"
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

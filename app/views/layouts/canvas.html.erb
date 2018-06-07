@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Demokit</title>
+
+    <!-- Babylon.js -->
+    <%= javascript_include_tag "https://code.jquery.com/pep/0.4.2/pep.min.js" %>
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/cannon.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/Oimo.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/earcut.min.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/babylon.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js" %>
+    <%= javascript_include_tag "https://preview.babylonjs.com/gui/babylon.gui.min.js" %>
+
+    <%= yield :styles %>
+  </head>
+  <body>
+    <canvas id="renderCanvas" touch-action="none"></canvas>
+    <%= yield :canvas %>
+  </body>
+</html>
