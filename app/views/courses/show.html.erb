@@ -12,7 +12,7 @@
 
   <dl class="dl-horizontal">
     <dt>Name:</dt>
-    <dd><%= @course.name %></dd>
+    <dd><%= @course.title %></dd>
     <dt>Description:</dt>
     <dd><%= @course.description %></dd>
     <dt>Objective:</dt>
@@ -27,8 +27,6 @@
     <div class="col col-md-3">
       <% if @course.descendants.any? %>
         <%= descendant_list_for(@course) %>
-      <% else %>
-        No Lessons
       <% end %>
     </div>
     <div class="col col-md-9">
