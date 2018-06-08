@@ -1,4 +1,4 @@
-class Integer
+module RomanizerAddon
   ROMAN_NUMBERS = {
     1000 => "M",
      900 => "CM",
@@ -29,4 +29,9 @@ class Integer
     end
     return roman
   end
+end
+
+
+class Integer
+  include RomanizerAddon
 end

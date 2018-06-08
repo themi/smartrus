@@ -54,6 +54,11 @@ module HasLineage
       self.class.hierachy_depth_for(lineage_path)
     end
 
+    def sibling_position
+      return 0 if lineage_path.nil?
+      self.lineage_path.split(self.class.send(:path_delimiter)).last.to_i
+    end
+
     def reset_lineage_tree
       reset_tree_recursive
     end

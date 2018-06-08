@@ -43,7 +43,7 @@ module HasLineage
     def path_delimiter
       has_lineage_options[:delimiter]
     end
-    private :path_delimiter
+    protected :path_delimiter
 
     def order_columns
       has_lineage_options[:order_column]

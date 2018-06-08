@@ -23,4 +23,12 @@ class Course < ApplicationRecord
 
   include HasLineage
   has_lineage tree_key_column: "category_id", order_column: "name"
+
+  def prefix
+    Courseify.titleize(hierarchy_depth - 1, sibling_position)
+  end
+
+  def title
+    prefix + ": #{self.name}"
+  end
 end
