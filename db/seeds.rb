@@ -8,6 +8,9 @@
 require "yaml"
 
 if Rails.env.development?
+
+  # Load in a set of logins for smoke test
+  # --------------------------------------
   password = ENV["ADMINISTRATORS_PASSWORD"]
 
   email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+student@")
