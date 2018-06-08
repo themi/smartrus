@@ -56,14 +56,29 @@ class Courseify
     end
 
     def save_additionals(course)
-      avs.each do |av|
-        AudioVisual.create(av.merge({imageable: course}))
-      end
+      create_audio_visuals(avs, course)
+      create_qualifications(quals, course)
       defns.each do |defn|
-        Definition.create(defn.merge({course: course}))
+        create_definition(defn, course)
       end
-      quals.each do |qual|
+    end
+
+    def create_definition(data_hash, course)
+      av_array = data_hash.delete(:audio_visuals) || []
+      definition = Definition.create(data_hash.merge({course: course}))
+      create_audio_visuals(av_array, definition)
+    end
+
+    def create_audio_visuals(av_array, imageable)
+      av_array.each do |av|
+        AudioVisual.create(av.merge({imageable: imageable}))
+      end
+    end
+
+    def create_qualifications(qual_array, course)
+      qual_array.each do |qual|
         Qualification.create(qual.merge({course: course}))
       end
     end
+
 end
