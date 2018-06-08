@@ -5,26 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+exit unless Rails.env.development?
+
 require "yaml"
 
-if Rails.env.development?
+puts "-----------------------------"
+puts " Smoke testing login details!"
+puts "-----------------------------"
+password = ENV["ADMINISTRATORS_PASSWORD"]
 
-  # Load in a set of logins for smoke test
-  # --------------------------------------
-  password = ENV["ADMINISTRATORS_PASSWORD"]
+email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+student@")
+u = Student.create(first_name: "Student", last_name: "Test", email: email_address, password: password, password_confirmation: password)
+puts "Student Login: #{u.email} Password: #{password}"
 
-  email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+student@")
-  u = Student.create(first_name: "Student", last_name: "Test", email: email_address, password: password, password_confirmation: password)
-  puts "Student Login: #{u.email} Password: #{password}"
+email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+supervisor@")
+sup = Supervisor.create(first_name: "Supervisor", last_name: "Test", email: email_address, password: password, password_confirmation: password)
+puts "Supervisor Login: #{sup.email} Password: #{password}"
 
-  email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+supervisor@")
-  sup = Supervisor.create(first_name: "Supervisor", last_name: "Test", email: email_address, password: password, password_confirmation: password)
-  puts "Supervisor Login: #{sup.email} Password: #{password}"
-
-  email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+admin@")
-  admin = Admin.create(first_name: "Admin", last_name: "Test", email: email_address, password: password, password_confirmation: password)
-  puts "Admin Login: #{admin.email} Password: #{password}"
-end
+email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+admin@")
+admin = Admin.create(first_name: "Admin", last_name: "Test", email: email_address, password: password, password_confirmation: password)
+puts "Admin Login: #{admin.email} Password: #{password}"
+puts "-----------------------------"
 
 filename = Rails.root.join("db/seeding/ironing_trousers.en.yml")
 data_hash = YAML.load(File.read(filename))
@@ -34,8 +35,8 @@ cat = Category.find_or_create_by(cat_hash)
 
 course = Courseify.new(data_hash[:course], cat).create
 Course.reset_lineage_tree
-puts "Added Course: #{course.name}"
+puts "Course: '#{course.name}'' loaded!"
 
-if Rails.env.development?
-  CourseHeader.create(owner: sup, course: course)
-end
+CourseHeader.create(owner: sup, course: course)
+
+puts "seeding completed!"

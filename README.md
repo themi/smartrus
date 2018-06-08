@@ -4,7 +4,7 @@ Disambiguation:  `smart are us`.  my intention is for __you__ to assert yourself
 
 Alternative pronounciation:  `smart-arse`  (lol)
 
-Noun: The self paced training website/app `smartrus.net` developed by [heminet](hemi.co.nz).
+Noun: The self paced training website/app `smartrus.net` developed by [timothyjohnhemi](hemi.co.nz).
 
 Verb: learn what others have to teach - teach others what you have learnt.
 
@@ -17,22 +17,16 @@ Adjective: (of a person) intelligent, understanding, creative
 
 ```bash
 git clone git@github.com:themi/smartrus-app.git
+cd smartrus-app
 ```
-
 * setup your ruby manager for ruby `2.5.1` and gemset `smartrus`
 
-* install gems
+* setup app
 
 ```bash
-cd smartrus-app
-gem install bundler
-bundle install
+./bin/setup
 ```
-* setup .env file
 
-```bash
-cp .env.example .env
-```
 * obtain the `master.key` from Tim and update `/.env`
 
 ```ruby
@@ -40,30 +34,18 @@ RAILS_MASTER_KEY=REPLACE_ME
 DEFAULT_HOST=localhost
 ```
 
-* setup database
-
-```bash
-cp config/database.yml.example config/database.yml
-bundle exec rails db:create db:migrate
-```
-
 ## Tests
 
 ```
-bundle exec rails_best_practices .
-bundle exec brakeman
-bundle exec rubocop
-bundle exec rspec
+rails_best_practices .
+brakeman
+rubocop
+./bin/rails spec
 ```
 
 ## Smoke Test
 
-* seed the database and take note of the output.  db:seed uses the envvars ADNINISTRATOR_EMAIL and ADMINISTRATORS_PASSWORD
-
-
 ```bash
-bundle exec rails db:seed
-
 Student Login: your+student@email.com Password: Password1!
 Supervisor Login: your+supervisor@email.com Password: Password1!
 Admin Login: your+admin@email.com Password: Password1!
