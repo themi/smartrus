@@ -63,7 +63,7 @@ end
 
 group :development do
   gem "annotate"
-  gem 'brakeman', :require => false
+  gem "brakeman", require: false
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "rails_best_practices"
   # gem "spring"
@@ -74,8 +74,8 @@ end
 group :test do
   gem "capybara"
   gem "database_cleaner"
-  gem "shoulda-matchers", "~> 3.1"
   gem "selenium-webdriver"
+  gem "shoulda-matchers", "~> 3.1"
   gem "simplecov", require: false
 end
 
