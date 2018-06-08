@@ -15,22 +15,24 @@ if Rails.env.development?
   puts "Student Login: #{u.email} Password: #{password}"
 
   email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+supervisor@")
-  u = Supervisor.create(first_name: "Supervisor", last_name: "Test", email: email_address, password: password, password_confirmation: password)
-  puts "Supervisor Login: #{u.email} Password: #{password}"
+  sup = Supervisor.create(first_name: "Supervisor", last_name: "Test", email: email_address, password: password, password_confirmation: password)
+  puts "Supervisor Login: #{sup.email} Password: #{password}"
 
   email_address = ENV["ADNINISTRATOR_EMAIL"].split("@").join("+admin@")
-  u = Admin.create(first_name: "Admin", last_name: "Test", email: email_address, password: password, password_confirmation: password)
-  puts "Admin Login: #{u.email} Password: #{password}"
+  admin = Admin.create(first_name: "Admin", last_name: "Test", email: email_address, password: password, password_confirmation: password)
+  puts "Admin Login: #{admin.email} Password: #{password}"
 end
 
-filename = Rails.root.join("db/seeding/ironing_trousers.yml")
+filename = Rails.root.join("db/seeding/ironing_trousers.en.yml")
 data_hash = YAML.load(File.read(filename))
 
 cat_hash = data_hash[:course].delete(:category)
 cat = Category.find_or_create_by(cat_hash)
 
 course = Courseify.new(data_hash[:course], cat).create
-
 Course.reset_lineage_tree
-
 puts "Added Course: #{course.name}"
+
+if Rails.env.development?
+  CourseHeader.create(owner: sup, course: course)
+end

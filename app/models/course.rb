@@ -16,6 +16,7 @@
 
 class Course < ApplicationRecord
   belongs_to :category
+  has_one :course_header
   has_many :qualifications
   has_many :audio_visuals, as: :imageable
   has_many :definitions
@@ -30,5 +31,9 @@ class Course < ApplicationRecord
 
   def title
     prefix + ": #{self.name}"
+  end
+
+  def grouping
+    category.to_s
   end
 end

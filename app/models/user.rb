@@ -30,6 +30,8 @@
 require 'gravtastic'
 
 class User < ApplicationRecord
+  has_many :content_headers, as: :owner
+
   def to_s
     "#{self.first_name} #{self.last_name}"
   end

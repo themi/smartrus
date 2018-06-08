@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2018_06_05_082016) do
     t.index ["grouping", "sub_grouping"], name: "index_categories_grouping"
   end
 
+  create_table "course_headers", force: :cascade do |t|
+    t.bigint "course_id"
+    t.integer "status", default: 0
+    t.integer "owner_id"
+    t.string "owner_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_headers_on_course_id"
+    t.index ["owner_id", "owner_type"], name: "index_course_headers_owner"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.bigint "category_id"
     t.string "name"
@@ -124,6 +135,7 @@ ActiveRecord::Schema.define(version: 2018_06_05_082016) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "course_headers", "courses"
   add_foreign_key "courses", "categories"
   add_foreign_key "definitions", "courses"
   add_foreign_key "prerequisites", "courses"

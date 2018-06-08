@@ -11,4 +11,8 @@
 
 class Category < ApplicationRecord
   has_many :courses
+
+  def to_s
+    "#{grouping}" + (sub_grouping.nil? ? "" : " - #{sub_grouping}")
+  end
 end

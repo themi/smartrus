@@ -11,7 +11,7 @@ class Courseify
     COUSRE_LEVEL_NAME = [:course, :lesson, :section, :part, :paragraph]
 
     def titleize(depth, number)
-      send("#{COUSRE_LEVEL_NAME[depth]}_name", number+1)
+      send("#{COUSRE_LEVEL_NAME[depth]}_name", number)
     end
 
     def course_name(number=nil)
