@@ -16,4 +16,5 @@ class Definition < ApplicationRecord
   has_many :transcripts
   has_many :audio_visuals, as: :imageable
   acts_as_list scope: :course
+  validates :word, presence: true
 end

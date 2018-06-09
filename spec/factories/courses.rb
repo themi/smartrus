@@ -16,9 +16,10 @@
 
 FactoryBot.define do
   factory :course do
-    name "MyString"
-    description "MyString"
-    objective "MyString"
-    reason_why "MyString"
+    category
+    name        { FFaker::Lorem.words }
+    description { FFaker::Lorem.paragraph }
+    objective   { FFaker::Lorem.sentence }
+    reason_why  { FFaker::Lorem.paragraph }
   end
 end

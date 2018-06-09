@@ -17,5 +17,5 @@
 require 'rails_helper'
 
 RSpec.describe AudioVisual, type: :model do
-  it { should validate_inclusion_of(:purpose).in_array(AudioVisual::AV_PURPOSES) }
+  it { is_expected.to validate_inclusion_of(:purpose).in_array(AudioVisual::AV_PURPOSES) }
 end

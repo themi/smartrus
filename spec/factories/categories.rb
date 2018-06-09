@@ -12,6 +12,5 @@
 FactoryBot.define do
   factory :category do
     grouping      { FFaker::Lorem.word }
-    sub_grouping  { FFaker::Lorem.word }
   end
 end

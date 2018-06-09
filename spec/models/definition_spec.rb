@@ -11,10 +11,9 @@
 #  updated_at    :datetime         not null
 #
 
-FactoryBot.define do
-  factory :definition do
-    course
-    word          { FFaker::Lorem.word }
-    reference_url { FFaker::Youtube.url }
-  end
+
+require 'rails_helper'
+
+RSpec.describe Definition, type: :model do
+  it { is_expected.to validate_presence_of(:word) }
 end
