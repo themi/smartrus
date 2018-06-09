@@ -29,12 +29,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Student, type: :model do
-  let(:email) { "email+student@example.com" }
-  subject(:student) { create :student, email: email, first_name: "first_name", last_name: "last_name" }
+RSpec.describe Supervisor, type: :model do
+  let(:email) { "email+supervisor@example.com" }
+  subject(:supervisor) { create :supervisor, email: email, first_name: "first_name", last_name: "last_name" }
 
   it "#to_s returns full name" do
-    expect(student.to_s).to match "first_name last_name"
+    expect(supervisor.to_s).to match "first_name last_name"
   end
 
 end

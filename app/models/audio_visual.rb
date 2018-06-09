@@ -14,8 +14,9 @@
 #
 
 class AudioVisual < ApplicationRecord
+  AV_PURPOSES = %w(mass instructional)
   belongs_to :imageable, :polymorphic => true
   has_many :transcripts
   acts_as_list :scope => [:imageable, :purpose]
-  validates :purpose, :inclusion => { :in => %w(mass instructional) }
+  validates :purpose, :inclusion => { in: AV_PURPOSES }
 end

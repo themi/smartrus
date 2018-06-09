@@ -13,11 +13,9 @@
 #  updated_at     :datetime         not null
 #
 
-FactoryBot.define do
-  factory :audio_visual do
-    source_url  { FFaker::Internet.uri("HTTPS") + "/" + FFaker::Youtube.url }
-    purpose     { AudioVisual::AV_PURPOSES.sample }
-    description { FFake::Lorem.paragraph }
-    imageable   { create(:course) }
-  end
+
+require 'rails_helper'
+
+RSpec.describe AudioVisual, type: :model do
+  it { should validate_inclusion_of(:purpose).in_array(AudioVisual::AV_PURPOSES) }
 end

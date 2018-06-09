@@ -9,11 +9,9 @@
 #  updated_at   :datetime         not null
 #
 
-class Category < ApplicationRecord
-  has_many :course_headers
-  has_many :courses, through: :course_headers
-
-  def to_s
-    "#{grouping}" + (sub_grouping.nil? ? "" : " - #{sub_grouping}")
+FactoryBot.define do
+  factory :category do
+    grouping      { FFaker::Lorem.word }
+    sub_grouping  { FFaker::Lorem.word }
   end
 end
