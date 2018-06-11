@@ -11,9 +11,9 @@
 #  updated_at       :datetime         not null
 #
 
-FactoryBot.define do
-  factory :qualification do
-    question          { FFaker::Lorem.sentence }
-    answer_reference  { FFaker::Lorem.sentence }
-  end
+
+require 'rails_helper'
+
+RSpec.describe Qualification, type: :model do
+  it { is_expected.to validate_presence_of(:question) }
 end

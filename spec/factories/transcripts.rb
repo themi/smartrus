@@ -12,8 +12,8 @@
 
 FactoryBot.define do
   factory :transcript do
-    language "MyString"
-    body "MyText"
-    audio_visual nil
+    language      { ["en", "en-us", "en-au"].sample }
+    body          { FFaker::Lorem.paragraph }
+    audio_visual
   end
 end

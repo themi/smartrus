@@ -28,15 +28,6 @@ puts "Admin Login: #{admin.email} Password: #{password}"
 puts "-----------------------------"
 
 filename = Rails.root.join("db/seeding/ironing_trousers.en.yml")
-data_hash = YAML.load(File.read(filename))
-
-cat_hash = data_hash[:course].delete(:category)
-cat = Category.find_or_create_by(cat_hash)
-
-course = Courseify.new(data_hash[:course], cat).create
-Course.reset_lineage_tree
-puts "Course: '#{course.name}'' loaded!"
-
-CourseHeader.create(owner: sup, course: course)
-
+Courseify.load_yaml(YAML.load(File.read(filename)), sup)
 puts "seeding completed!"
+

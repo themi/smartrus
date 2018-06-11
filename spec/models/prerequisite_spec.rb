@@ -11,8 +11,8 @@
 #  updated_at    :datetime         not null
 #
 
-class Prerequisite < ApplicationRecord
-  belongs_to :course
-  acts_as_list scope: :course
-  validates :description, presence: true
+require 'rails_helper'
+
+RSpec.describe Prerequisite, type: :model do
+  it { is_expected.to validate_presence_of(:description) }
 end

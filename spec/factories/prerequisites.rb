@@ -11,8 +11,10 @@
 #  updated_at    :datetime         not null
 #
 
-class Prerequisite < ApplicationRecord
-  belongs_to :course
-  acts_as_list scope: :course
-  validates :description, presence: true
+FactoryBot.define do
+  factory :prerequisite do
+    course
+    description  { FFaker::Lorem.sentence }
+    reference_url  { FFaker::Youtube.url }
+  end
 end
