@@ -40,6 +40,7 @@ class Courseify
       cat = Category.find_or_create_by(cat_hash)
       course = Courseify.new(data_hash[:course], cat).create
       CourseHeader.create(owner: user, course: course)
+      Course.reset_lineage_tree
       course
     end
   end
@@ -51,7 +52,6 @@ class Courseify
     sections.each do |sect_hash|
       Courseify.new(sect_hash, category).create(course)
     end
-    course.reset_lineage_tree
     course
   end
 
